@@ -5,12 +5,8 @@ class Yatzy:
 
     @staticmethod
     def yatzy(dice):
-        counts = [0] * (len(dice) + 1)
-        for die in dice:
-            counts[die - 1] += 1
-        for i in range(len(counts)):
-            if counts[i] == 5:
-                return 50
+        if all(die == dice[0] for die in dice):
+            return 50
         return 0
 
     @staticmethod
