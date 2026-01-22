@@ -1,4 +1,8 @@
 class Yatzy:
+    # Constants
+    FIFTY = 50
+    ZERO = 0
+
     @staticmethod
     def chance(*dice):
         return sum(dice)
@@ -6,8 +10,8 @@ class Yatzy:
     @staticmethod
     def yatzy(dice):
         if all(die == dice[0] for die in dice):
-            return 50
-        return 0
+            return Yatzy.FIFTY
+        return Yatzy.ZERO
 
     @staticmethod
     def reapeted_number_sum(dice, number):
