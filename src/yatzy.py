@@ -29,19 +29,20 @@ class Yatzy:
     def threes(*dice):
         return Yatzy.reapeted_number_sum(dice, 3)
 
-    @staticmethod
-    def fours(*dice):
-        return Yatzy.reapeted_number_sum(dice, 4)
+    @classmethod
+    def fours(cls, *dice):
+        return cls.reapeted_number_sum(dice, 4)
 
-    @staticmethod
-    def fives(*dice):
-        return Yatzy.reapeted_number_sum(dice, 5)
+    @classmethod
+    def fives(cls, *dice):
+        return cls.reapeted_number_sum(dice, 5)
 
-    @staticmethod
-    def sixes(*dice):
-        return Yatzy.reapeted_number_sum(dice, 6)
+    @classmethod
+    def sixes(cls, *dice):
+        return cls.reapeted_number_sum(dice, 6)
 
-    def score_pair(self, d1, d2, d3, d4, d5):
+    @classmethod
+    def score_pair(cls, d1, d2, d3, d4, d5):
         counts = [0] * 6
         counts[d1 - 1] += 1
         counts[d2 - 1] += 1
