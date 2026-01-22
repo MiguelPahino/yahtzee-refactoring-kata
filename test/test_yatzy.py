@@ -15,6 +15,12 @@ def test_yatzy_scores_50():
     assert 0 == Yatzy.yatzy([6, 6, 6, 6, 3])
 
 
+def test_reapeted_number_sum():
+    assert 6 == Yatzy.reapeted_number_sum([1, 2, 3, 3, 4], 3)
+    assert 10 == Yatzy.reapeted_number_sum([2, 2, 2, 2, 2], 2)
+    assert 0 == Yatzy.reapeted_number_sum([1, 2, 3, 4, 5], 6)
+
+
 def test_1s():
     assert 1 == Yatzy.ones(1, 2, 3, 4, 5)
     assert 2 == Yatzy.ones(1, 2, 1, 4, 5)

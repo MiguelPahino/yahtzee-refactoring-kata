@@ -10,8 +10,12 @@ class Yatzy:
         return 0
 
     @staticmethod
+    def reapeted_number_sum(dice, number):
+        return sum(die == number for die in dice)
+
+    @staticmethod
     def ones(*dice):
-        return sum(die == 1 for die in dice)
+        return Yatzy.reapeted_number_sum(dice, 1)
 
     @staticmethod
     def twos(d1, d2, d3, d4, d5):
