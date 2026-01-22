@@ -22,49 +22,20 @@ class Yatzy:
         return Yatzy.reapeted_number_sum(dice, 2)
 
     @staticmethod
-    def threes(d1, d2, d3, d4, d5):
-        s = 0
-        if d1 == 3:
-            s += 3
-        if d2 == 3:
-            s += 3
-        if d3 == 3:
-            s += 3
-        if d4 == 3:
-            s += 3
-        if d5 == 3:
-            s += 3
-        return s
+    def threes(*dice):
+        return Yatzy.reapeted_number_sum(dice, 3)
 
-    def __init__(self, d1=0, d2=0, d3=0, d4=0, _5=0):
-        self.dice = [0] * 5
-        self.dice[0] = d1
-        self.dice[1] = d2
-        self.dice[2] = d3
-        self.dice[3] = d4
-        self.dice[4] = _5
+    @staticmethod
+    def fours(*dice):
+        return Yatzy.reapeted_number_sum(dice, 4)
 
-    def fours(self):
-        sum = 0
-        for at in range(5):
-            if self.dice[at] == 4:
-                sum += 4
-        return sum
+    @staticmethod
+    def fives(*dice):
+        return Yatzy.reapeted_number_sum(dice, 5)
 
-    def fives(self):
-        s = 0
-        i = 0
-        for i in range(len(self.dice)):
-            if self.dice[i] == 5:
-                s = s + 5
-        return s
-
-    def sixes(self):
-        sum = 0
-        for at in range(len(self.dice)):
-            if self.dice[at] == 6:
-                sum = sum + 6
-        return sum
+    @staticmethod
+    def sixes(*dice):
+        return Yatzy.reapeted_number_sum(dice, 6)
 
     def score_pair(self, d1, d2, d3, d4, d5):
         counts = [0] * 6
