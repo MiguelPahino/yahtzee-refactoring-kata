@@ -1,7 +1,7 @@
 class Yatzy:
     @staticmethod
-    def chance(die_one, die_two, die_three, die_four, die_five):
-        return die_one + die_two + die_three + die_four + die_five
+    def chance(*dice):
+        return sum(dice)
 
     @staticmethod
     def yatzy(dice):
@@ -10,12 +10,8 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def ones(die_one, die_two, die_three, die_four, die_five):
-        dice = [die_one, die_two, die_three, die_four, die_five]
-
-        result = sum(die == 1 for die in dice)
-
-        return result
+    def ones(*dice):
+        return sum(die == 1 for die in dice)
 
     @staticmethod
     def twos(d1, d2, d3, d4, d5):
