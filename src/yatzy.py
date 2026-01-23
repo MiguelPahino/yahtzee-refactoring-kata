@@ -1,3 +1,6 @@
+from src.pips import Pips
+
+
 class Yatzy:
     # Constants
     FIFTY = 50
@@ -19,27 +22,27 @@ class Yatzy:
 
     @staticmethod
     def ones(*dice):
-        return Yatzy.reapeted_number_sum(dice, 1)
+        return Yatzy.reapeted_number_sum(dice, Pips.ONE.value)
 
     @staticmethod
     def twos(*dice):
-        return Yatzy.reapeted_number_sum(dice, 2)
+        return Yatzy.reapeted_number_sum(dice, Pips.TWO.value)
 
     @staticmethod
     def threes(*dice):
-        return Yatzy.reapeted_number_sum(dice, 3)
+        return Yatzy.reapeted_number_sum(dice, Pips.THREE.value)
 
     @classmethod
     def fours(cls, *dice):
-        return cls.reapeted_number_sum(dice, 4)
+        return cls.reapeted_number_sum(dice, Pips.FOUR.value)
 
     @classmethod
     def fives(cls, *dice):
-        return cls.reapeted_number_sum(dice, 5)
+        return cls.reapeted_number_sum(dice, Pips.FIVE.value)
 
     @classmethod
     def sixes(cls, *dice):
-        return cls.reapeted_number_sum(dice, 6)
+        return cls.reapeted_number_sum(dice, Pips.SIX.value)
 
     @classmethod
     def score_pair(cls, d1, d2, d3, d4, d5):
