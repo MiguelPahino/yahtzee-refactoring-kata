@@ -1,4 +1,11 @@
+from src.pips import Pips
+
+
 class Yatzy:
+    # Constants
+    FIFTY = 50
+    ZERO = 0
+
     @staticmethod
     def chance(*dice):
         return sum(dice)
@@ -6,122 +13,63 @@ class Yatzy:
     @staticmethod
     def yatzy(dice):
         if all(die == dice[0] for die in dice):
-            return 50
-        return 0
+            return Yatzy.FIFTY
+        return Yatzy.ZERO
 
-    @staticmethod
     def reapeted_number_sum(dice, number):
-        return sum(die == number for die in dice)
+        return sum(die for die in dice if die == number)
 
     @staticmethod
     def ones(*dice):
-        return Yatzy.reapeted_number_sum(dice, 1)
+        return Yatzy.reapeted_number_sum(dice, Pips.ONE.value)
 
     @staticmethod
-    def twos(d1, d2, d3, d4, d5):
-        sum = 0
-        if d1 == 2:
-            sum += 2
-        if d2 == 2:
-            sum += 2
-        if d3 == 2:
-            sum += 2
-        if d4 == 2:
-            sum += 2
-        if d5 == 2:
-            sum += 2
-        return sum
+    def twos(*dice):
+        return Yatzy.reapeted_number_sum(dice, Pips.TWO.value)
 
     @staticmethod
-    def threes(d1, d2, d3, d4, d5):
-        s = 0
-        if d1 == 3:
-            s += 3
-        if d2 == 3:
-            s += 3
-        if d3 == 3:
-            s += 3
-        if d4 == 3:
-            s += 3
-        if d5 == 3:
-            s += 3
-        return s
+    def threes(*dice):
+        return Yatzy.reapeted_number_sum(dice, Pips.THREE.value)
 
-    def __init__(self, d1=0, d2=0, d3=0, d4=0, _5=0):
-        self.dice = [0] * 5
-        self.dice[0] = d1
-        self.dice[1] = d2
-        self.dice[2] = d3
-        self.dice[3] = d4
-        self.dice[4] = _5
+    @classmethod
+    def fours(cls, *dice):
+        return cls.reapeted_number_sum(dice, Pips.FOUR.value)
 
-    def fours(self):
-        sum = 0
-        for at in range(5):
-            if self.dice[at] == 4:
-                sum += 4
-        return sum
+    @classmethod
+    def fives(cls, *dice):
+        return cls.reapeted_number_sum(dice, Pips.FIVE.value)
 
-    def fives(self):
-        s = 0
-        i = 0
-        for i in range(len(self.dice)):
-            if self.dice[i] == 5:
-                s = s + 5
-        return s
+    @classmethod
+    def sixes(cls, *dice):
+        return cls.reapeted_number_sum(dice, Pips.SIX.value)
 
-    def sixes(self):
-        sum = 0
-        for at in range(len(self.dice)):
-            if self.dice[at] == 6:
-                sum = sum + 6
-        return sum
-
-    def score_pair(self, d1, d2, d3, d4, d5):
-        counts = [0] * 6
-        counts[d1 - 1] += 1
-        counts[d2 - 1] += 1
-        counts[d3 - 1] += 1
-        counts[d4 - 1] += 1
-        counts[d5 - 1] += 1
-        at = 0
-        for at in range(6):
-            if counts[6 - at - 1] == 2:
-                return (6 - at) * 2
+    @classmethod
+    def score_pair(cls, *dice):
+        TWO = Pips.TWO.value
+        for number in Pips.reversedValues():
+            if dice.count(number) >= TWO:
+                return number * TWO
         return 0
 
-    @staticmethod
-    def two_pair(d1, d2, d3, d4, d5):
-        counts = [0] * 6
-        counts[d1 - 1] += 1
-        counts[d2 - 1] += 1
-        counts[d3 - 1] += 1
-        counts[d4 - 1] += 1
-        counts[d5 - 1] += 1
-        n = 0
-        score = 0
-        for i in range(6):
-            if counts[6 - i - 1] >= 2:
-                n = n + 1
-                score += 6 - i
-
-        if n == 2:
-            return score * 2
-        else:
+    @classmethod
+    def two_pair(cls, *dice):
+        TWO = Pips.TWO.value
+        total = 0
+        pairs_counter = 0
+        for number in Pips.reversedValues():
+            if dice.count(number) >= TWO:
+                total += number * 2
+                pairs_counter += 1
+        if pairs_counter < 2:
             return 0
+        return total
 
     @staticmethod
-    def four_of_a_kind(_1, _2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[_1 - 1] += 1
-        tallies[_2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        for i in range(6):
-            if tallies[i] >= 4:
-                return (i + 1) * 4
-        return 0
+    def four_of_a_kind(*dice):
+        FOUR = Pips.FOUR.value
+        return next(
+            (number * FOUR for number in Pips.values() if dice.count(number) >= FOUR), 0
+        )
 
     @staticmethod
     def three_of_a_kind(d1, d2, d3, d4, d5):
