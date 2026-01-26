@@ -43,4 +43,4 @@ if __name__ == "__main__":
     print(Pips.reversedValues())
     """Llama al metodo reversedValues de Pips, donde este devuelve los valores en una lista de forma inversa"""
     print(Pips.minus(Pips.FIVE))
-    """Muestra todos los valores del enum """
+    """Muestra todos los valores del enum menos el valor de la clave dada """
