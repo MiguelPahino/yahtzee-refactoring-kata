@@ -98,22 +98,14 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def largeStraight(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        if (
-            tallies[1] == 1
-            and tallies[2] == 1
-            and tallies[3] == 1
-            and tallies[4] == 1
-            and tallies[5] == 1
-        ):
-            return 20
-        return 0
+    def largeStraight(*dice):
+        dice_not_reapeted = set(dice)
+        dice_sorted = sorted(list(dice_not_reapeted))
+        return (
+            20
+            if all(dice_sorted) in Pips.minus(Pips.SIX) and len(dice_sorted) == 5
+            else Yatzy.ZERO
+        )
 
     @staticmethod
     def fullHouse(d1, d2, d3, d4, d5):
@@ -145,3 +137,7 @@ class Yatzy:
             return _2_at * 2 + _3_at * 3
         else:
             return 0
+
+
+if __name__ == "__main__":
+    Yatzy.largeStraight(6, 2, 3, 4, 5)
